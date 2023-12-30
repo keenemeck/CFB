@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,600;9..40,800&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap" rel="stylesheet"> 
+		%sveltekit.head%
+	</head>
+	<body data-sveltekit-preload-data="hover">
+
+        
+
+    
+    
+    <button on:click="{sayHello}">
+        test
+    </button>
+
+		<div style="display: contents">%sveltekit.body%</div>
+        <div class="card">
+            <div class="card-logo">
+                <img src="images/North Carolina.png" alt="bad"/>
+            </div>
+            <div class="card-text">North Carolina</div>
+        </div>
+        <div class="card" style="background-color: #782F40; color: #ceb888">
+            <div class="card-logo">
+                <img src="images/Florida State.png" alt="bad"/>
+            </div>
+            <div class="card-text">Florida State</div>
+            <div class="card-rank">5</div>
+        </div>
+        <div class="card" style="background-color: #00274c; color: #FFCB05">
+            <div class="card-logo">
+                <img src="images/Michigan.png" alt="bad"/>
+            </div>
+            <div class="card-text">Michigan</div>
+            <div class="card-rank">1</div>
+        </div>
+        <div class="card" style="background-color: #F1B82D; color: #000000">
+            <div class="card-logo">
+                <img src="images/Missouri.png" alt="bad"/>
+            </div>
+            <div class="card-text">Mizzou</div>
+            <div class="card-rank">9</div>
+        </div>
+	</body>
+</html>
+
+<style>
+
+:root {
+    background-color: #141c24;
+}
+
+.card {
+    font-family: 'DM Sans';
+    font-size: 32px;
+    font-weight: bold;
+    background-color: #99bfe5;
+    color: #ffffff;
+
+    width: 360px;
+    height: 48px;
+    
+}
+
+.card-logo {
+    padding: 4px 8px 4px 8px;
+    float: left;
+}
+
+.card-logo img {
+    display: block; /* Make the image a block element */
+    height: 40px;
+    margin: 0; /* Reset margin to zero */
+}
+
+.card-text {
+    line-height: 48px;
+    float: left;
+}
+
+.card-rank {
+    width: 40px;
+    text-align: center;
+    padding-right: 4px;
+    line-height: 48px;
+    float: right;
+}
+
+</style>
