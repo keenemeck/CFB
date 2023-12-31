@@ -1,10 +1,41 @@
 <script lang="ts">
 
-    import { teams } from './scrape.ts';
+
+    import { Team, fetch, members, sortByWins, sortByPoints } from './scrape.ts';
+    import { onMount } from 'svelte';
+
+    let teams = {};
+
+    onMount(async () => {
+        try {
+        // Fetch and merge data from all three sources
+        teams = await fetch();
+
+        // Now you can use the merged data array in your component
+        } catch (error) {
+        // Handle error, e.g., display an error message
+        console.error('Failed to fetch data:', error);
+        }
+    });
+
+    //TODO: fix
+    function sortPoints() {
+        //teams.sortByPoints();
+    }
 
     function handleButtonClick() {
-        console.log("test");
+        try {  
+            console.log(teams[team].wins + "-" + teams[team].losses);
+            console.log("Points: " + teams[team].totalPoints);
+            console.log(teams[team].color1 + " " + teams[team].color2);
+        } catch {
+            console.log("no team of that name is known. check spelling or abbreviation to ensure the team name is the same as is posted")
+        }
+        console.log(members);
     }
+
+    let team = "";
+    
 
 </script>
 
@@ -16,67 +47,21 @@
 
 <main>
 
-    <button on:click={handleButtonClick}>
-        test
-    </button>
+    <button on:click={handleButtonClick}>enter</button>
 
-
+    <input bind:value={team} placeholder="enter team" />
 
     <div class="memberTeams">
-        <div class="card" style="background-color: #00274c; color: #FFCB05">
-            <div class="card-logo">
-                <img src="images/Michigan.png" alt="img"/>
+        
+            {#each Object.values(teams) as team (team.name)}
+            <div class="card" style="background-color: {team.color1}; color: {team.color2}">
+                <div class="card-logo">
+                    <img src="images/{team.name}.png" alt="img"/>
+                </div>
+                <div class="card-text">{team.name}</div>
             </div>
-            <div class="card-text">Michigan</div>
-            <div class="card-rank">1</div>
-        </div>
+            {/each}
 
-        <div class="card" style="background-color: #4b2e83; color: #e8e3d3">
-            <div class="card-logo">
-                <img src="images/Washington.png" alt="img"/>
-            </div>
-            <div class="card-text">Washington</div>
-            <div class="card-rank">2</div>
-        </div>
-
-        <div class="card" style="background-color: #EE7524; color: #f0f0f0">
-            <div class="card-logo">
-                <img src="images/Texas.png" alt="img"/>
-            </div>
-            <div class="card-text">Texas</div>
-            <div class="card-rank">3</div>
-        </div>
-
-        <div class="card" style="background-color: #690014; color: #f1f2f3">
-            <div class="card-logo">
-                <img src="images/Alabama.png" alt="img"/>
-            </div>
-            <div class="card-text">Alabama</div>
-            <div class="card-rank">4</div>
-        </div>
-
-        <div class="card" style="background-color: #782F40; color: #ceb888">
-            <div class="card-logo">
-                <img src="images/Florida State.png" alt="img"/>
-            </div>
-            <div class="card-text">Florida State</div>
-            <div class="card-rank">5</div>
-        </div>
-
-        <div class="card" style="background-color: #F1B82D; color: #000000">
-            <div class="card-logo">
-                <img src="images/Missouri.png" alt="img"/>
-            </div>
-            <div class="card-text">Mizzou</div>
-            <div class="card-rank">9</div>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-logo">
-            <img src="images/North Carolina.png" alt="img"/>
-        </div>
-        <div class="card-text">North Carolina</div>
     </div>
         
 </main>

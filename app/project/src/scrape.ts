@@ -1,17 +1,66 @@
-import * as fs from 'fs';
 import { split } from 'lodash';
+import { csv } from 'd3-fetch';
 
-let fileContent;
+import App from './App.svelte';
 
-// Check if the code is running in a Node.js environment
-if (typeof window === 'undefined') {
-  const fs = require('fs');
-  const fileContent = fs.readFileSync(filePath, 'utf-8');
+const app = new App({
+	target: document.body,
+});
+
+export default app;
+
+interface MyCSVRow {
+    [key: string]: string;
 }
 
-function readCSV(filePath: string): string[] {
-    const fileContent = fs.readFileSync(filePath, 'utf-8');
-    return fileContent.split('\n');
+export class Team {
+    name: string;
+    conference: string;
+    division: string;
+    color1: string;
+    color2: string;
+    wins: number;
+    losses: number;
+    games: Game[];
+    points: number[];
+    totalPoints: number = 0;
+
+    constructor(team2: Team) {
+        this.name = team2.name;
+        this.conference = team2.conference;
+        this.division = team2.division;
+        this.color1 = team2.color1;
+        this.color2 = team2.color2;
+        this.wins = team2.wins;
+        this.losses = team2.losses;
+        this.games = team2.games;
+        this.points = team2.points;
+        this.totalPoints = team2.totalPoints;
+    }
+}
+
+class Conference {
+    teams: Team[];
+
+    constructor() {
+        this.teams = [];
+    }
+
+}
+
+
+class Member {
+    teams: Team[];
+    totalPoints: number;
+
+    constructor() {
+        this.teams = [];
+        this.totalPoints = 0;
+    }
+
+    add(team: Team): void {
+        this.teams.push(team);
+    }
 }
 
 const nameTranslations: { [key: string]: string } = {
@@ -35,6 +84,177 @@ const nameTranslations: { [key: string]: string } = {
     "North Carolina State": "NC State",
     "Central Florida": "UCF",
 };
+
+
+let teamDataContent: MyCSVRow[];
+let dataContent: MyCSVRow[];
+let apPollContent: MyCSVRow[];
+
+export const teams: { [key: string]: Team } = {};
+
+//TODO: functify
+
+const Nathan  = new Member;
+const Taylor  = new Member;
+const Conner  = new Member;
+const Logan   = new Member;
+const Dalton  = new Member;
+const Ryan    = new Member;
+const Brandon = new Member;
+const Tony    = new Member;
+const Steve   = new Member;
+const Jim     = new Member;
+const Miles   = new Member;
+const Kelly   = new Member;
+
+export const members: Member[] = [Nathan, Taylor, Conner, Logan, Dalton, Ryan, Brandon, Tony, Steve, Jim, Miles, Kelly];
+
+const NathanTeams  = ["Clemson", "Kansas State", "Liberty", "Toledo", "Maryland", "Marshall", "Florida Atlantic", "Wake Forest", "Iowa State", "Jacksonville State"];
+const TaylorTeams  = ["USC", "North Carolina", "SMU", "NC State", "Fresno State", "Syracuse", "Oklahoma State", "Kent State", "Texas State", "UMass"];
+const ConnerTeams  = ["Penn State", "Notre Dame", "Colorado", "Ole Miss", "North Texas", "Buffalo", "San José State", "BYU", "UTEP", "Hawai'i"];
+const LoganTeams   = ["Ohio State", "Houston", "Miami", "Memphis", "Georgia Southern", "Washington State", "Virginia Tech", "Nevada", "Western Michigan", "Florida International"];
+const DaltonTeams  = ["LSU", "Washington", "Iowa", "South Carolina", "Arizona State", "San Diego State", "Louisiana Tech", "Southern Mississippi", "Bowling Green", "Temple"];
+const RyanTeams    = ["Texas", "Wisconsin", "Louisville", "Air Force", "Western Kentucky", "Eastern Michigan", "Louisiana", "Minnesota", "California", "UNLV"];
+const BrandonTeams = ["Alabama", "Utah", "Troy", "Boise State", "Pittsburgh", "Kansas", "Middle Tennessee", "Nebraska", "Tulsa", "Rice"];
+const TonyTeams    = ["Georgia", "Oregon State", "Oklahoma", "Northern Illinois", "Ball State", "West Virginia", "Kentucky", "Connecticut", "Utah State", "Louisiana Monroe"];
+const SteveTeams   = ["Michigan", "Tennessee", "Texas Tech", "South Alabama", "Coastal Carolina", "Baylor", "Army", "Duke", "Navy", "Old Dominion"];
+const JimTeams     = ["Auburn", "Texas A&M", "James Madison", "Appalachian State", "UCF", "Florida", "Mississippi State", "Georgia State", "UAB", "South Florida"];
+const MilesTeams   = ["Florida State", "TCU", "UT San Antonio", "Arkansas State", "Ohio", "Colorado State", "New Mexico State", "Illinois", "Georgia Tech", "Cincinnati"];
+const KellyTeams   = ["Oregon", "Tulane", "UCLA", "Arkansas", "Missouri", "Wyoming", "East Carolina", "Miami (OH)", "Michigan State", "Central Michigan"];
+
+
+export async function fetch () {
+    teamDataContent = await csv('https://raw.githubusercontent.com/keenemeck/CFB/main/app/project/src/teamData.csv');
+
+    teamDataContent.slice(0).forEach((row: MyCSVRow) => {
+
+        const {Id, School, Mascot, Abbreviation, AltName1, AltName2, AltName3, Conference, Division, Color, AltColor, Logo0, Logo1, Twitter, LocationVenueId, LocationName, LocationCity, LocationState, LocationZip, LocationCountryCode, LocationTimezone, LocationLatitude, LocationLongitude, LocationElevation, LocationCapacity, LocationYearConstructed, LocationGrass, LocationDome} = row;
+    
+        const team: Team = {
+            name: row.School,
+            conference: row.Conference,
+            division: row.Division,
+            color1: row.Color,
+            color2: row.AltColor,
+            wins: 0,
+            losses: 0,
+            games: [],
+            points: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            totalPoints: 0,
+        };
+    
+        teams[team.name] = team;
+    
+        if (!conferences[team.conference]) {
+            conferences[team.conference] = { teams: [] };
+        }
+    
+        conferences[team.conference].teams.push(team);
+        allConference.teams.push(team);
+        
+    });
+    
+    //TODO: functify
+
+    const poll: string[][] = new Array(15).fill([]).map(() => new Array(25).fill(''));
+
+    apPollContent = await csv('https://raw.githubusercontent.com/keenemeck/CFB/main/app/project/src/apPoll.csv');
+
+    apPollContent.slice(0).forEach((row: MyCSVRow) => {
+
+        const {Wk, Date, Rk, School, Prev, Chng, Conf, ThisWeek} = row;
+
+        const name: string = row.School.replace(/\s*\(.*$/, '');
+
+        const rowIndex: number = parseInt(row.Wk) - 1;
+        const columnIndex: number = parseInt(row.Rk) - 1;
+
+        poll[rowIndex][columnIndex] = name;
+    });
+
+    for (let i = 0; i < poll.length; i++) {
+        for (let j = 0; j < poll[0].length; j++) {
+            let team = poll[i][j];
+            
+            if (nameTranslations.hasOwnProperty(team)) {
+                team = nameTranslations[team];
+            }
+    
+            teams[team].points[i + 1] += rankPoints(j + 1);
+            teams[team].totalPoints += rankPoints(j + 1);
+    
+            if (i === 0) {
+                teams[team].points[0] += rankPoints(j + 1);
+                teams[team].totalPoints += rankPoints(j + 1);
+            }
+        }
+    }
+
+    dataContent = await csv('https://raw.githubusercontent.com/keenemeck/CFB/main/app/project/src/data.csv');
+
+    dataContent.slice(1).forEach((row: MyCSVRow) => {
+        const line: string = row._row;
+
+        const {Rk, Wk, Date, Time, Day, Winner, Pts1, Location, Loser, Pts2, Notes} = row;
+
+        const teamString = Object.values(row).join(',');
+
+        const game = new Game(split(teamString, ','));
+    
+        if (game.occurred) {
+            if (teams.hasOwnProperty(game.winner)) {
+                const t = teams[game.winner];
+                t.wins++;
+                t.games.push(game);
+    
+                let week = game.week - 1;
+    
+                if (game.bowlGame()) week = 15;
+    
+                t.points[week] = Math.max(
+                    1 +
+                    game.confWin(teams) +
+                    game.beatRanked(teams) +
+                    game.upset(teams) * 2 +
+                    game.confChampGame() * 8 +
+                    game.bowlGame() * 2 +
+                    game.NY6() * 2, 0);
+    
+                t.totalPoints += t.points[week];
+            }
+    
+            if (teams.hasOwnProperty(game.loser)) {
+                const t = teams[game.loser];
+                t.losses++;
+                t.games.push(game);
+    
+                let week = game.week - 1;
+    
+                if (game.bowlGame()) week = 15;
+    
+                t.points[week] = Math.max(game.confChampGame() * 3 + game.bowlGame() * 2 + game.NY6() * 2, 0);
+                t.totalPoints += t.points[week];
+            }
+        }
+    });
+
+    createTeam(Nathan, NathanTeams, teams);
+    createTeam(Taylor, TaylorTeams, teams);
+    createTeam(Conner, ConnerTeams, teams);
+    createTeam(Logan, LoganTeams, teams);
+    createTeam(Dalton, DaltonTeams, teams);
+    createTeam(Ryan, RyanTeams, teams);
+    createTeam(Brandon, BrandonTeams, teams);
+    createTeam(Tony, TonyTeams, teams);
+    createTeam(Steve, SteveTeams, teams);
+    createTeam(Jim, JimTeams, teams);
+    createTeam(Miles, MilesTeams, teams);
+    createTeam(Kelly, KellyTeams, teams);
+
+    return teams;
+
+};
+
 
 interface Conference {
     teams: Team[];
@@ -162,55 +382,6 @@ class Game {
     }
 }
 
-class Team {
-    name: string;
-    conference: string;
-    division: string;
-    color1: string;
-    color2: string;
-    wins: number;
-    losses: number;
-    games: Game[];
-    points: number[];
-    totalPoints: number = 0;
-
-    constructor(team2: Team) {
-        this.name = team2.name;
-        this.conference = team2.conference;
-        this.division = team2.division;
-        this.color1 = team2.color1;
-        this.color2 = team2.color2;
-        this.wins = team2.wins;
-        this.losses = team2.losses;
-        this.games = team2.games;
-        this.points = team2.points;
-        this.totalPoints = team2.totalPoints;
-    }
-}
-
-class Conference {
-    teams: Team[];
-
-    constructor() {
-        this.teams = [];
-    }
-
-}
-
-
-class Member {
-    teams: Team[];
-    totalPoints: number;
-
-    constructor() {
-        this.teams = [];
-        this.totalPoints = 0;
-    }
-
-    add(team: Team): void {
-        this.teams.push(team);
-    }
-}
 
 function printGame(game: Game): void {
     if (game.winnerRank < 99) {
@@ -223,7 +394,7 @@ function printGame(game: Game): void {
     console.log(game.loser + " " + game.winnerPoints + "-" + game.loserPoints + '\n');
 }
 
-function sortByWins(a: Team, b: Team): boolean {
+export function sortByWins(a: Team, b: Team): boolean {
     if (a.wins == b.wins) {
         if (a.losses == b.losses) {
             return (a.name < b.name);
@@ -233,7 +404,7 @@ function sortByWins(a: Team, b: Team): boolean {
     return (a.wins > b.wins);
 }
 
-function sortByPoints(a: Team, b: Team): boolean {
+export function sortByPoints(a: Team, b: Team): boolean {
     if (a.totalPoints == b.totalPoints) {
         return (a.name < b.name);
     }
@@ -261,167 +432,18 @@ function createTeam(member: Member, teamList: string[], teams: { [key: string]: 
 }
 
 
-
-
-
-const apPollFilePath = 'apPoll.csv';
-const apPollContent = readCSV(apPollFilePath);
-
-const poll: string[][] = new Array(15).fill([]).map(() => new Array(25).fill(''));
-
-apPollContent.slice(1).forEach((line: string) => {
-    const s: string[] = split(line, ',');
-
-    const name: string = split(s[3], ' (')[0];
-
-    const rowIndex: number = parseInt(s[0]) - 1;
-    const columnIndex: number = parseInt(s[2]) - 1;
-
-    poll[rowIndex][columnIndex] = name;
-});
-
-export const teams: { [key: string]: Team } = {};
 const conferences: { [key: string]: Conference } = {};
 const allConference: Conference = { teams: [] };
 
-const teamDataFilePath = 'teamData.csv';
-const teamDataContent = readCSV(teamDataFilePath);
-
-teamDataContent.slice(1).forEach((line: string) => {
-
-    const s: string[] = split(line, ',');
-
-    const team: Team = {
-        name: s[1].substring(1, s[1].length - 1),
-        conference: s[7].substring(1, s[7].length - 1),
-        division: s[8].substring(1, s[8].length - 1),
-        color1: s[9].substring(1, s[9].length - 1),
-        color2: s[10].substring(1, s[10].length - 1),
-        wins: 0,
-        losses: 0,
-        games: [],
-        points: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        totalPoints: 0,
-    };
-
-    teams[team.name] = team;
-
-    if (!conferences[team.conference]) {
-        conferences[team.conference] = { teams: [] };
-    }
-
-    conferences[team.conference].teams.push(team);
-    allConference.teams.push(team);
-    
-});
 
 
-const dataFilePath = 'data.csv';
-const dataContent = readCSV(dataFilePath);
-
-dataContent.slice(1).forEach((line: string) => {
-    const game = new Game(split(line, ','));
-
-    if (game.occurred) {
-        if (teams.hasOwnProperty(game.winner)) {
-            const t = teams[game.winner];
-            t.wins++;
-            t.games.push(game);
-
-            let week = game.week - 1;
-
-            if (game.bowlGame()) week = 15;
-
-            t.points[week] = Math.max(
-                1 +
-                game.confWin(teams) +
-                game.beatRanked(teams) +
-                game.upset(teams) * 2 +
-                game.confChampGame() * 8 +
-                game.bowlGame() * 2 +
-                game.NY6() * 2, 0);
-
-            t.totalPoints += t.points[week];
-        }
-
-        if (teams.hasOwnProperty(game.loser)) {
-            const t = teams[game.loser];
-            t.losses++;
-            t.games.push(game);
-
-            let week = game.week - 1;
-
-            if (game.bowlGame()) week = 15;
-
-            t.points[week] = Math.max(game.confChampGame() * 3 + game.bowlGame() * 2 + game.NY6() * 2, 0);
-            t.totalPoints += t.points[week];
-        }
-    }
-});
 
 
-for (let i = 0; i < poll.length; i++) {
-    for (let j = 0; j < poll[0].length; j++) {
-        let team = poll[i][j];
-        
-        if (nameTranslations.hasOwnProperty(team)) {
-            team = nameTranslations[team];
-        }
-
-        teams[team].points[i + 1] += rankPoints(j + 1);
-        teams[team].totalPoints += rankPoints(j + 1);
-
-        if (i === 0) {
-            teams[team].points[0] += rankPoints(j + 1);
-            teams[team].totalPoints += rankPoints(j + 1);
-        }
-    }
-}
-
-const Nathan  = new Member;
-const Taylor  = new Member;
-const Conner  = new Member;
-const Logan   = new Member;
-const Dalton  = new Member;
-const Ryan    = new Member;
-const Brandon = new Member;
-const Tony    = new Member;
-const Steve   = new Member;
-const Jim     = new Member;
-const Miles   = new Member;
-const Kelly   = new Member;
-
-const NathanTeams  = ["Clemson", "Kansas State", "Liberty", "Toledo", "Maryland", "Marshall", "Florida Atlantic", "Wake Forest", "Iowa State", "Jacksonville State"];
-const TaylorTeams  = ["USC", "North Carolina", "SMU", "NC State", "Fresno State", "Syracuse", "Oklahoma State", "Kent State", "Texas State", "UMass"];
-const ConnerTeams  = ["Penn State", "Notre Dame", "Colorado", "Ole Miss", "North Texas", "Buffalo", "San José State", "BYU", "UTEP", "Hawai'i"];
-const LoganTeams   = ["Ohio State", "Houston", "Miami", "Memphis", "Georgia Southern", "Washington State", "Virginia Tech", "Nevada", "Western Michigan", "Florida International"];
-const DaltonTeams  = ["LSU", "Washington", "Iowa", "South Carolina", "Arizona State", "San Diego State", "Louisiana Tech", "Southern Mississippi", "Bowling Green", "Temple"];
-const RyanTeams    = ["Texas", "Wisconsin", "Louisville", "Air Force", "Western Kentucky", "Eastern Michigan", "Louisiana", "Minnesota", "California", "UNLV"];
-const BrandonTeams = ["Alabama", "Utah", "Troy", "Boise State", "Pittsburgh", "Kansas", "Middle Tennessee", "Nebraska", "Tulsa", "Rice"];
-const TonyTeams    = ["Georgia", "Oregon State", "Oklahoma", "Northern Illinois", "Ball State", "West Virginia", "Kentucky", "Connecticut", "Utah State", "Louisiana Monroe"];
-const SteveTeams   = ["Michigan", "Tennessee", "Texas Tech", "South Alabama", "Coastal Carolina", "Baylor", "Army", "Duke", "Navy", "Old Dominion"];
-const JimTeams     = ["Auburn", "Texas A&M", "James Madison", "Appalachian State", "UCF", "Florida", "Mississippi State", "Georgia State", "UAB", "South Florida"];
-const MilesTeams   = ["Florida State", "TCU", "UT San Antonio", "Arkansas State", "Ohio", "Colorado State", "New Mexico State", "Illinois", "Georgia Tech", "Cincinnati"];
-const KellyTeams   = ["Oregon", "Tulane", "UCLA", "Arkansas", "Missouri", "Wyoming", "East Carolina", "Miami (OH)", "Michigan State", "Central Michigan"];
-
-createTeam(Nathan, NathanTeams, teams);
-createTeam(Taylor, TaylorTeams, teams);
-createTeam(Conner, ConnerTeams, teams);
-createTeam(Logan, LoganTeams, teams);
-createTeam(Dalton, DaltonTeams, teams);
-createTeam(Ryan, RyanTeams, teams);
-createTeam(Brandon, BrandonTeams, teams);
-createTeam(Tony, TonyTeams, teams);
-createTeam(Steve, SteveTeams, teams);
-createTeam(Jim, JimTeams, teams);
-createTeam(Miles, MilesTeams, teams);
-createTeam(Kelly, KellyTeams, teams);
 
 // Log the resulting teams, conferences, and allConference
 // console.log('Teams:', teams);
 // console.log('Conferences:', conferences);
 // console.log('All Conference:', allConference);
 
-console.log(teams["NC State"]);
-console.log(teams["NC State"].totalPoints);
-console.log(Steve.totalPoints);
+/*console.log(teams["NC State"].totalPoints);
+console.log(Steve.totalPoints);*/
