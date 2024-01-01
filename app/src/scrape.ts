@@ -49,11 +49,13 @@ class Conference {
 }
 
 
-class Member {
+export class Member {
+    name: string;
     teams: Team[];
     totalPoints: number;
 
-    constructor() {
+    constructor(name: string) {
+        this.name = name;
         this.teams = [];
         this.totalPoints = 0;
     }
@@ -94,18 +96,18 @@ export const teams: { [key: string]: Team } = {};
 
 //TODO: functify
 
-const Nathan  = new Member;
-const Taylor  = new Member;
-const Conner  = new Member;
-const Logan   = new Member;
-const Dalton  = new Member;
-const Ryan    = new Member;
-const Brandon = new Member;
-const Tony    = new Member;
-const Steve   = new Member;
-const Jim     = new Member;
-const Miles   = new Member;
-const Kelly   = new Member;
+const Nathan  = new Member("Nathan");
+const Taylor  = new Member("Taylor");
+const Conner  = new Member("Conner");
+const Logan   = new Member("Logan");
+const Dalton  = new Member("Dalton");
+const Ryan    = new Member("Ryan");
+const Brandon = new Member("Brandon");
+const Tony    = new Member("Tony");
+const Steve   = new Member("Steve");
+const Jim     = new Member("Jim");
+const Miles   = new Member("Miles");
+const Kelly   = new Member("Kelly");
 
 export const members: Member[] = [Nathan, Taylor, Conner, Logan, Dalton, Ryan, Brandon, Tony, Steve, Jim, Miles, Kelly];
 
@@ -124,7 +126,7 @@ const KellyTeams   = ["Oregon", "Tulane", "UCLA", "Arkansas", "Missouri", "Wyomi
 
 
 export async function fetch () {
-    teamDataContent = await csv('https://raw.githubusercontent.com/keenemeck/CFB/main/app/project/src/teamData.csv');
+    teamDataContent = await csv('https://raw.githubusercontent.com/keenemeck/CFB/main/app/src/teamData.csv');
 
     teamDataContent.slice(0).forEach((row: MyCSVRow) => {
 
@@ -158,7 +160,7 @@ export async function fetch () {
 
     const poll: string[][] = new Array(15).fill([]).map(() => new Array(25).fill(''));
 
-    apPollContent = await csv('https://raw.githubusercontent.com/keenemeck/CFB/main/app/project/src/apPoll.csv');
+    apPollContent = await csv('https://raw.githubusercontent.com/keenemeck/CFB/main/app/src/apPoll.csv');
 
     apPollContent.slice(0).forEach((row: MyCSVRow) => {
 
@@ -190,7 +192,7 @@ export async function fetch () {
         }
     }
 
-    dataContent = await csv('https://raw.githubusercontent.com/keenemeck/CFB/main/app/project/src/data.csv');
+    dataContent = await csv('https://raw.githubusercontent.com/keenemeck/CFB/main/app/src/data.csv');
 
     dataContent.slice(1).forEach((row: MyCSVRow) => {
         const line: string = row._row;
@@ -250,6 +252,8 @@ export async function fetch () {
     createTeam(Jim, JimTeams, teams);
     createTeam(Miles, MilesTeams, teams);
     createTeam(Kelly, KellyTeams, teams);
+
+    members.sort((a, b) => b.totalPoints - a.totalPoints);
 
     return teams;
 
@@ -359,7 +363,7 @@ class Game {
     }
 
     bowlGame(): number {
-        return this.notes.includes("Bowl") ? 1 : 0;
+        return this.notes != null && this.notes.includes("Bowl") ? 1 : 0;
     }
 
     NY6(): number {
@@ -429,6 +433,7 @@ function createTeam(member: Member, teamList: string[], teams: { [key: string]: 
         member.add(teams[teamList[i]]);
         member.totalPoints += teams[teamList[i]].totalPoints;
     }
+    member.teams.sort((a, b) => b.totalPoints - a.totalPoints);
 }
 
 

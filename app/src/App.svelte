@@ -1,15 +1,20 @@
 <script lang="ts">
 
 
-    import { Team, fetch, members, sortByWins, sortByPoints } from './scrape.ts';
+    import { Team, fetch, Member, members, sortByWins, sortByPoints } from './scrape.ts';
     import { onMount } from 'svelte';
 
     let teams = {};
+    let memberList = {};
 
     onMount(async () => {
         try {
         // Fetch and merge data from all three sources
         teams = await fetch();
+
+        for (let i = 0; i < members.length; i++) {
+            memberList[i] = members[i];
+        }
 
         // Now you can use the merged data array in your component
         } catch (error) {
@@ -25,13 +30,14 @@
 
     function handleButtonClick() {
         try {  
+            for (let member of members) {
+                console.log(member.totalPoints);
+            }
             console.log(teams[team].wins + "-" + teams[team].losses);
             console.log("Points: " + teams[team].totalPoints);
-            console.log(teams[team].color1 + " " + teams[team].color2);
         } catch {
             console.log("no team of that name is known. check spelling or abbreviation to ensure the team name is the same as is posted")
         }
-        console.log(members);
     }
 
     let team = "";
@@ -47,22 +53,32 @@
 
 <main>
 
+    <div class="memberTeams">
+        
+        {#each Object.values(memberList) as member}
+
+            <div class="card" style="display:flex; justify-content: space-between; height: 72px;">
+                <div class="card-name">{member.name}</div>
+                <div class="card-points" style="line-height: 82px">{member.totalPoints}</div>
+            </div>
+
+            {#each Object.values(member.teams) as team}
+                <div class="card" style="background-color: {team.color1}; color: {team.color2}">
+                    <div class="card-logo">
+                        <img src="images/{team.name}.png" alt="img"/>
+                    </div>
+                    <div class="card-text">{team.name}</div>
+                    <div class="card-points">{team.totalPoints}</div>
+                </div>
+            {/each}
+
+        {/each}
+        
+    </div>
+
     <button on:click={handleButtonClick}>enter</button>
 
     <input bind:value={team} placeholder="enter team" />
-
-    <div class="memberTeams">
-        
-            {#each Object.values(teams) as team (team.name)}
-            <div class="card" style="background-color: {team.color1}; color: {team.color2}">
-                <div class="card-logo">
-                    <img src="images/{team.name}.png" alt="img"/>
-                </div>
-                <div class="card-text">{team.name}</div>
-            </div>
-            {/each}
-
-    </div>
         
 </main>
 
@@ -83,12 +99,12 @@
         font-family: 'DM Sans';
         font-size: 32px;
         font-weight: bold;
-        background-color: #99bfe5;
+        background-color: #00000000;
         color: #ffffff;
     
-        width: 360px;
+        line-height: 48px;
+        width: 410px;
         height: 48px;
-        
     }
     
     .card-logo {
@@ -103,7 +119,6 @@
     }
     
     .card-text {
-        line-height: 48px;
         float: left;
     }
     
@@ -111,9 +126,24 @@
         width: 40px;
         text-align: center;
         padding-right: 4px;
-        line-height: 48px;
         float: right;
-
     }
-    
+
+    .card-points {
+
+        text-align: center;
+        padding-right: 4px;
+        float: right;
+    }
+
+    .card-name {
+        padding-left: 8px;
+        font-size: 48px;
+        line-height: 72px;
+    }
+
+    .card-points {
+        padding-right: 8px;
+    }
+
 </style>
