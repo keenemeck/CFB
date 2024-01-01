@@ -58,7 +58,7 @@
         {#each Object.values(memberList) as member}
 
             <div class="card" style="display:flex; justify-content: space-between; height: 72px;">
-                <div class="card-name">{member.name}</div>
+                <div class="card-name">1. {member.name}</div>
                 <div class="card-points" style="line-height: 82px">{member.totalPoints}</div>
             </div>
 
