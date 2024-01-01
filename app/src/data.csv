@@ -899,12 +899,12 @@ Rk,Wk,Date,Time,Day,Winner,Pts,,Loser,Pts,Notes
 898,19,Dec 29 2023,3:30 PM,Fri,Memphis,36,@,Iowa State,26,Liberty Bowl
 899,19,Dec 29 2023,8:00 PM,Fri,(9) Missouri,14,N,(7) Ohio State,3,Cotton Bowl
 900,19,Dec 29 2023,4:00 PM,Fri,(15) Notre Dame,40,N,(21) Oregon State,8,Sun Bowl
-901,19,Dec 30 2023,2:00 PM,Sat,Auburn,0,N,Maryland,0,Music City Bowl
-902,19,Dec 30 2023,4:00 PM,Sat,(6) Georgia,0,N,(4) Florida State,0,Orange Bowl
-903,19,Dec 30 2023,12:00 PM,Sat,(11) Mississippi,0,N,(10) Penn State,0,Peach Bowl
-904,19,Dec 30 2023,4:30 PM,Sat,Toledo,0,N,Wyoming,0,Arizona Bowl
-905,20,Jan 1 2024,5:00 PM,Mon,(5) Alabama,,N,(1) Michigan,,Rose Bowl
-906,20,Jan 1 2024,1:00 PM,Mon,(20) Iowa,,N,(25) Tennessee,,Citrus Bowl
-907,20,Jan 1 2024,1:00 PM,Mon,(18) Liberty,,N,(8) Oregon,,Fiesta Bowl
-908,20,Jan 1 2024,8:45 PM,Mon,(3) Texas,,N,(2) Washington,,Sugar Bowl
-909,20,Jan 1 2024,12:00 PM,Mon,Wisconsin,,N,(13) Louisiana State,,ReliaQuest Bowl
+901,19,Dec 30 2023,4:00 PM,Sat,(6) Georgia,63,N,(4) Florida State,3,Orange Bowl
+902,19,Dec 30 2023,2:00 PM,Sat,Maryland,31,N,Auburn,13,Music City Bowl
+903,19,Dec 30 2023,12:00 PM,Sat,(11) Mississippi,38,N,(10) Penn State,25,Peach Bowl
+904,19,Dec 30 2023,4:30 PM,Sat,Wyoming,16,N,Toledo,15,Arizona Bowl
+905,20,Jan 1 2024,5:00 PM,Mon,(5) Alabama,0,N,(1) Michigan,0,Rose Bowl
+906,20,Jan 1 2024,1:00 PM,Mon,(20) Iowa,0,N,(25) Tennessee,0,Citrus Bowl
+907,20,Jan 1 2024,1:00 PM,Mon,(18) Liberty,0,N,(8) Oregon,0,Fiesta Bowl
+908,20,Jan 1 2024,8:45 PM,Mon,(3) Texas,0,N,(2) Washington,0,Sugar Bowl
+909,20,Jan 1 2024,12:00 PM,Mon,Wisconsin,0,N,(13) Louisiana State,0,ReliaQuest Bowl
