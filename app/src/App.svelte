@@ -55,22 +55,24 @@
 
     <div class="memberTeams">
         
-        {#each Object.values(memberList) as member}
+        {#each Object.values(memberList) as member, i}
 
-            <div class="card" style="display:flex; justify-content: space-between; height: 72px;">
-                <div class="card-name">1. {member.name}</div>
-                <div class="card-points" style="line-height: 82px">{member.totalPoints}</div>
-            </div>
-
-            {#each Object.values(member.teams) as team}
-                <div class="card" style="background-color: {team.color1}; color: {team.color2}">
-                    <div class="card-logo">
-                        <img src="images/{team.name}.png" alt="img"/>
-                    </div>
-                    <div class="card-text">{team.name}</div>
-                    <div class="card-points">{team.totalPoints}</div>
+            <div class="member">
+                <div class="card" class:gold={i === 0} class:silver={i === 1} class:bronze={i === 2} style="display:flex; justify-content: space-between; height: 72px;">
+                    <div class="card-name">{i + 1}. {member.name}</div>
+                    <div class="card-points" style="line-height: 82px">{member.totalPoints}</div>
                 </div>
-            {/each}
+
+                {#each Object.values(member.teams) as team}
+                    <div class="card" style="background-color: {team.color1}; color: {team.color2}">
+                        <div class="card-logo">
+                            <img src="images/{team.name}.png" alt="img"/>
+                        </div>
+                        <div class="card-text">{team.name}</div>
+                        <div class="card-points">{team.totalPoints}</div>
+                    </div>
+                {/each}
+            </div>
 
         {/each}
         
@@ -86,6 +88,7 @@
 
     :root {
         background-color: #141c24;
+        
     }
 
     .memberTeams {
@@ -93,6 +96,15 @@
         font-size: 32px;
         font-weight: bold;
         color: #ffffff;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        place-items: center;
+
+    }
+
+    .member {
+        margin-bottom: 32px;
     }
     
     .card {
@@ -144,6 +156,18 @@
 
     .card-points {
         padding-right: 8px;
+    }
+
+    .gold {
+        color: #f4e000;
+    }
+
+    .silver {
+        color: #bbc6cf;
+    }
+
+    .bronze {
+        color: #b07932;
     }
 
 </style>

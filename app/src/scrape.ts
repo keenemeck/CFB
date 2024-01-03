@@ -15,6 +15,7 @@ interface MyCSVRow {
 
 export class Team {
     name: string;
+    abbreviation: string;
     conference: string;
     division: string;
     color1: string;
@@ -27,6 +28,7 @@ export class Team {
 
     constructor(team2: Team) {
         this.name = team2.name;
+        this.abbreviation = team2.abbreviation;
         this.conference = team2.conference;
         this.division = team2.division;
         this.color1 = team2.color1;
@@ -134,6 +136,7 @@ export async function fetch () {
     
         const team: Team = {
             name: row.School,
+            abbreviation: row.Abbreviation,
             conference: row.Conference,
             division: row.Division,
             color1: row.Color,
@@ -377,10 +380,12 @@ class Game {
         return found ? 1 : 0;
     }
 
+    //TODO: top 4 in last poll
     playoffs(): number {
         return 0;
     }
 
+    //TODO: top 1 in last poll?
     nationalChamps(): number {
         return 0;
     }
