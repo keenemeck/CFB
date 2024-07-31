@@ -871,7 +871,7 @@ Rk,Wk,Date,Time,Day,Winner,Pts,,Loser,Pts,Notes
 870,17,Dec 16 2023,5:45 PM,Sat,Fresno State,37,N,New Mexico State,10,New Mexico Bowl
 871,17,Dec 16 2023,2:15 PM,Sat,Jacksonville State,34,N,Louisiana,31,New Orleans Bowl
 872,17,Dec 16 2023,11:00 AM,Sat,Ohio,41,N,Georgia Southern,21,Myrtle Beach Bowl
-873,17,Dec 16 2023,9:15 PM,Sat,Texas Tech,34,N,California,8,Independence Bowl
+873,17,Dec 16 2023,9:15 PM,Sat,Texas Tech,34,N,California,14,Independence Bowl
 874,17,Dec 16 2023,7:30 PM,Sat,UCLA,35,N,Boise State,22,LA Bowl
 875,17,Dec 18 2023,2:30 PM,Mon,Western Kentucky,38,N,Old Dominion,35,Famous Toastery Bowl
 876,18,Dec 19 2023,9:00 PM,Tue,Texas-San Antonio,35,N,Marshall,17,Frisco Bowl
@@ -883,7 +883,7 @@ Rk,Wk,Date,Time,Day,Winner,Pts,,Loser,Pts,Notes
 882,18,Dec 23 2023,3:30 PM,Sat,Georgia State,45,N,Utah State,22,Famous Idaho Potato Bowl
 883,18,Dec 23 2023,12:00 PM,Sat,Northern Illinois,21,N,Arkansas State,19,Camellia Bowl
 884,18,Dec 23 2023,7:30 PM,Sat,Northwestern,14,N,Utah,7,Las Vegas Bowl
-885,18,Dec 23 2023,7:00 PM,Sat,South Alabama,59,@,Eastern Michigan,10,LendingTree Bowl
+885,18,Dec 23 2023,7:00 PM,Sat,South Alabama,59,,Eastern Michigan,10,68 Ventures Bowl
 886,19,Dec 26 2023,8:00 PM,Tue,Kansas,49,N,Nevada-Las Vegas,36,Guaranteed Rate Bowl
 887,19,Dec 26 2023,2:00 PM,Tue,Minnesota,30,N,Bowling Green,24,Quick Lane Bowl
 888,19,Dec 26 2023,5:30 PM,Tue,Texas State,45,N,Rice,21,First Responder Bowl
@@ -896,15 +896,16 @@ Rk,Wk,Date,Time,Day,Winner,Pts,,Loser,Pts,Notes
 895,19,Dec 28 2023,5:45 PM,Thu,Kansas State,28,N,(19) North Carolina State,19,Pop-Tarts Bowl
 896,19,Dec 28 2023,2:15 PM,Thu,Rutgers,31,N,Miami (FL),24,Pinstripe Bowl
 897,19,Dec 29 2023,12:00 PM,Fri,Clemson,38,N,Kentucky,35,Gator Bowl
-898,19,Dec 29 2023,3:30 PM,Fri,Memphis,36,@,Iowa State,26,Liberty Bowl
+898,19,Dec 29 2023,3:30 PM,Fri,Memphis,36,,Iowa State,26,Liberty Bowl
 899,19,Dec 29 2023,8:00 PM,Fri,(9) Missouri,14,N,(7) Ohio State,3,Cotton Bowl
 900,19,Dec 29 2023,4:00 PM,Fri,(15) Notre Dame,40,N,(21) Oregon State,8,Sun Bowl
 901,19,Dec 30 2023,4:00 PM,Sat,(6) Georgia,63,N,(4) Florida State,3,Orange Bowl
 902,19,Dec 30 2023,2:00 PM,Sat,Maryland,31,N,Auburn,13,Music City Bowl
 903,19,Dec 30 2023,12:00 PM,Sat,(11) Mississippi,38,N,(10) Penn State,25,Peach Bowl
 904,19,Dec 30 2023,4:30 PM,Sat,Wyoming,16,N,Toledo,15,Arizona Bowl
-905,20,Jan 1 2024,5:00 PM,Mon,(5) Alabama,0,N,(1) Michigan,0,Rose Bowl
-906,20,Jan 1 2024,1:00 PM,Mon,(20) Iowa,0,N,(25) Tennessee,0,Citrus Bowl
-907,20,Jan 1 2024,1:00 PM,Mon,(18) Liberty,0,N,(8) Oregon,0,Fiesta Bowl
-908,20,Jan 1 2024,8:45 PM,Mon,(3) Texas,0,N,(2) Washington,0,Sugar Bowl
-909,20,Jan 1 2024,12:00 PM,Mon,Wisconsin,0,N,(13) Louisiana State,0,ReliaQuest Bowl
+905,20,Jan 1 2024,12:00 PM,Mon,(13) Louisiana State,35,N,Wisconsin,31,ReliaQuest Bowl
+906,20,Jan 1 2024,5:00 PM,Mon,(1) Michigan,27,N,(5) Alabama,20,Rose Bowl
+907,20,Jan 1 2024,1:00 PM,Mon,(8) Oregon,45,N,(18) Liberty,6,Fiesta Bowl
+908,20,Jan 1 2024,1:00 PM,Mon,(25) Tennessee,35,N,(20) Iowa,0,Citrus Bowl
+909,20,Jan 1 2024,8:45 PM,Mon,(2) Washington,37,N,(3) Texas,31,Sugar Bowl
+910,21,Jan 8 2024,7:30 PM,Mon,(1) Michigan,34,N,(2) Washington,13,College Football Playoff National Championship
