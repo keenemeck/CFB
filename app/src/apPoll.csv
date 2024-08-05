@@ -1,29 +1,29 @@
 Wk,Date,Rk,School,Prev,Chng,Conf,ThisWeek
-15,2023-12-03,1,Michigan (13-0),2,1,Big Ten (East),W 26-0 vs. #16 Iowa
-15,2023-12-03,2,Washington (13-0),3,1,Pac-12,W 34-31 vs. #5 Oregon
-15,2023-12-03,3,Texas (12-1),7,4,Big 12,W 49-21 vs. #18 Oklahoma State
-15,2023-12-03,4,Alabama (12-1),8,4,SEC (West),W 27-24 vs. #1 Georgia
-15,2023-12-03,5,Florida State (13-0),4,1,ACC,W 16-6 vs. #14 Louisville
-15,2023-12-03,6,Georgia (12-1),1,4,SEC (East),L 24-27 vs. #8 Alabama
-15,2023-12-03,7,Ohio State (11-1),6,1,Big Ten (East),No game
-15,2023-12-03,8,Oregon (11-2),5,3,Pac-12,L 31-34 vs. #3 Washington
-15,2023-12-03,9,Missouri (10-2),9,,SEC (East),No game
-15,2023-12-03,10,Penn State (10-2),10,,Big Ten (East),No game
-15,2023-12-03,11,Ole Miss (10-2),11,,SEC (West),No game
-15,2023-12-03,12,Oklahoma (10-2),12,,Big 12,No game
-15,2023-12-03,13,LSU (9-3),13,,SEC (West),No game
-15,2023-12-03,14,Arizona (9-3),15,1,Pac-12,No game
-15,2023-12-03,15,Louisville (10-3),14,1,ACC,L 6-16 vs. #4 Florida State
-15,2023-12-03,16,Notre Dame (9-3),17,1,Ind,No game
-15,2023-12-03,17,Iowa (10-3),16,1,Big Ten (West),L 0-26 vs. #2 Michigan
-15,2023-12-03,18,North Carolina State (9-3),19,1,ACC,No game
-15,2023-12-03,19,Oregon State (8-4),20,1,Pac-12,No game
-15,2023-12-03,20,Oklahoma State (9-4),18,2,Big 12,L 21-49 vs. #7 Texas
-15,2023-12-03,21,Tennessee (8-4),21,,SEC (East),No game
-15,2023-12-03,22,Clemson (8-4),23,1,ACC,No game
-15,2023-12-03,23,Liberty (13-0),24,1,CUSA,W 49-35 vs. New Mexico State
-15,2023-12-03,24,SMU (11-2),,,American,W 26-14 vs. #22 Tulane
-15,2023-12-03,25,Kansas State (8-4),25,,Big 12,No game
+15,2023-12-03,1,Michigan (13-0),2,1,51,Big Ten (East)
+15,2023-12-03,2,Washington (13-0),3,1,11,Pac-12
+15,2023-12-03,3,Texas (12-1),7,4,,Big 12
+15,2023-12-03,4,Florida State (13-0),4,,,ACC
+15,2023-12-03,5,Alabama (12-1),8,3,,SEC (West)
+15,2023-12-03,6,Georgia (12-1),1,5,,SEC (East)
+15,2023-12-03,7,Ohio State (11-1),6,1,,Big Ten (East)
+15,2023-12-03,8,Oregon (11-2),5,3,,Pac-12
+15,2023-12-03,9,Missouri (10-2),9,,,SEC (East)
+15,2023-12-03,10,Penn State (10-2),10,,,Big Ten (East)
+15,2023-12-03,11,Ole Miss (10-2),11,,,SEC (West)
+15,2023-12-03,12,Oklahoma (10-2),12,,,Big 12
+15,2023-12-03,13,LSU (9-3),13,,,SEC (West)
+15,2023-12-03,14,Arizona (9-3),14,,,Pac-12
+15,2023-12-03,15,Notre Dame (9-3),16,1,,Ind
+15,2023-12-03,16,Louisville (10-3),15,1,,ACC
+15,2023-12-03,17,SMU (11-2),25,8,,American
+15,2023-12-03,18,Liberty (13-0),20,2,,CUSA
+15,2023-12-03,19,North Carolina State (9-3),21,2,,ACC
+15,2023-12-03,20,Iowa (10-3),18,2,,Big Ten (West)
+15,2023-12-03,21,Oregon State (8-4),21,,,Pac-12
+15,2023-12-03,22,Oklahoma State (9-4),19,3,,Big 12
+15,2023-12-03,23,Tulane (11-2),17,6,,American
+15,2023-12-03,24,James Madison (11-1),24,,,Sun Belt (East)
+15,2023-12-03,25,Tennessee (8-4),,,,SEC (East)
 14,2023-11-28,1,Georgia (12-0),1,,SEC (East),
 14,2023-11-28,2,Michigan (12-0),3,1,Big Ten (East),
 14,2023-11-28,3,Washington (12-0),4,1,Pac-12,
