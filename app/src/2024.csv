@@ -1,8 +1,8 @@
 Rk,Wk,Date,Time,Day,Visitor,Pts,,Home,Pts,Notes
-1,1,Aug 24 2024,12:00 PM,Sat,Georgia Tech,,N,(6) Florida State,,
-2,1,Aug 24 2024,4:00 PM,Sat,Montana State,,@,New Mexico,,
-3,1,Aug 24 2024,8:00 PM,Sat,(22) Southern Methodist,,@,Nevada,,
-4,1,Aug 25 2024,12:00 AM,Sun,Delaware State,,@,Hawaii,,
+1,1,Aug 24 2024,12:00 PM,Sat,Georgia Tech,24,N,(10) Florida State,21,
+2,1,Aug 24 2024,4:00 PM,Sat,Montana State,35,@,New Mexico,31,
+3,1,Aug 24 2024,8:00 PM,Sat,Southern Methodist,29,@,Nevada,24,
+4,1,Aug 25 2024,12:00 AM,Sun,Hawaii,35,,Delaware State,14,
 5,2,Aug 29 2024,8:00 PM,Thu,Alcorn State,,@,Alabama-Birmingham,,
 6,2,Aug 29 2024,7:30 PM,Thu,Arkansas-Pine Bluff,,@,Arkansas,,
 7,2,Aug 29 2024,7:00 PM,Thu,Central Connecticut State,,@,Central Michigan,,
